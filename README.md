@@ -60,7 +60,7 @@ Enterprise-Grade Problem Solving: Transitioning legacy manual spreadsheets into 
 Full-Stack Cohesion: Seamless integration between backend Laravel services and client-side reactive components.
 Clean Architecture & Maintainability: Modular service layers, reusable Blade components, and comprehensive test coverage.
 👤 Author & Contact
-Developer: [Your Name / Your Username]
-LinkedIn: [Your LinkedIn Profile URL]
-Email: [Your Professional Email]
-GitHub: @YourGitHubUsername
+Developer: Muhammad Ragil Raya Rabani / Gilyaa 
+LinkedIn: https://www.linkedin.com/in/gilyaa/
+Email: ragielbyan@gmail.com
+GitHub: @Gilyaa
