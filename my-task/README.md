@@ -1,81 +1,81 @@
-# Fitur My Task — OWL Learning
+# My Task Feature — OWL Learning
 
-Fitur manajemen tugas (task) yang saya bangun untuk platform e-learning OWL di PT Krakatau Posco. Melalui fitur ini, admin dapat memberikan tugas kepada peserta di dalam alur belajar yang sudah ada, dan peserta dapat melihat, mengerjakan, dan mengumpulkan tugasnya dari halaman My Task.
+A task management feature I built for the OWL e-learning platform at PT Krakatau Posco. With this feature, admins can assign tasks to learners within the existing learning flow, and learners can view, work on, and submit their tasks from the My Task page.
 
-_Dokumentasi ini mengikuti kondisi project per 12 November 2026._
+_This documentation reflects the project state as of November 12, 2026._
 
-<!-- Setelah screenshot dimasukkan ke folder images/, hapus komentar ini.
-     Nama file yang dirujuk di bawah: dashboard-admin.png, form-buat-task.png,
+<!-- Once screenshots are added to the images/ folder, remove this comment.
+     Files referenced below: dashboard-admin.png, form-create-task.png,
      dashboard-user.png, global-task.png, review-submissions.png -->
 
-## Latar Belakang
+## Background
 
-Sebelum fitur ini ada, pemberian tugas kepada peserta belum terwadahi di dalam LMS. My Task mengintegrasikan tugas langsung ke struktur belajar OWL: task ditempatkan pada materi yang sedang dipelajari peserta, sehingga konteks tugasnya selalu jelas.
+Before this feature existed, assigning tasks to learners had no dedicated place inside the LMS. My Task integrates tasks directly into OWL's learning structure: tasks are placed on the material learners are studying, so the context of each task is always clear.
 
-## Cara Kerja
+## How It Works
 
-### Penempatan Task (Placement)
+### Task Placement
 
-Task dapat ditempatkan pada tiga jenis induk:
+A task can be placed under three types of parents:
 
 - **Playlist**
 - **Content**
-- **Offline Training** (penempatan tersedia; data offline training belum terhubung ke project, sehingga pilihannya belum aktif)
+- **Offline Training** (placement is available; offline training data is not yet connected to the project, so this option is not yet active)
 
-Selain itu, task juga dapat dibuat **tanpa penempatan (standalone)** untuk kebutuhan tugas yang tidak terikat materi tertentu.
+In addition, a task can also be created **without placement (standalone)**, for tasks that are not tied to specific material.
 
-Di sisi peserta, task yang sudah diterbitkan (published) muncul di halaman My Task setelah peserta membuka induknya (playlist/konten terkait). Task pada playlist juga dapat dibuka (unlock) oleh peserta dari halaman playlist.
+On the learner side, a published task appears on the My Task page once the learner has opened its parent (the related playlist/content). Tasks in a playlist can also be unlocked by learners from the playlist page.
 
-### Task Group
+### Task Groups
 
-Task dapat dikelompokkan ke dalam **grup** (judul + deskripsi) agar pengelolaan task yang jumlahnya banyak lebih rapi. Grup yang dihapus masuk ke trash (soft delete) dan dapat dipulihkan.
+Tasks can be grouped into **groups** (title + description) so that managing a large number of tasks stays organized. A deleted group goes to the trash (soft delete) and can be restored.
 
-### Tipe Task
+### Task Types
 
-Terdapat 5 tipe task, dan form pembuatan task menyesuaikan isinya mengikuti tipe yang dipilih:
+There are 5 task types, and the task creation form adjusts its contents to the selected type:
 
-1. **File Submission** — peserta mengumpulkan file sebagai jawaban. Admin mengatur tipe file yang diizinkan, ukuran maksimal per file, dan opsi alternatif berupa link Google Drive dari peserta.
-2. **Course Assignment** — peserta membuka course yang ditautkan. Course di dalam LMS menandai task otomatis selesai saat progress course mencapai 100%, sedangkan course berupa link eksternal ditandai selesai secara manual oleh peserta ("Mark as Complete").
-3. **Survey** — peserta mengisi form survey yang sudah ada di LMS; admin memilih survey tujuan dari dropdown.
-4. **Essay / Reflection** — peserta menjawab dalam teks panjang; admin menilai secara manual.
-5. **Action Plan** — form builder ala Google Form: jawaban singkat, paragraf, pilihan ganda (multiple choice), checkbox dengan batas minimal/maksimal pilihan, dropdown, file, skala, dan rating bintang. Admin meninjau jawaban secara manual.
+1. **File Submission** — learners upload a file as the answer. Admins set the allowed file types, the maximum size per file, and an option for learners to submit a Google Drive link instead.
+2. **Course Assignment** — learners open a linked course. A course inside the LMS marks the task as completed automatically when the course progress reaches 100%, while an external-link course is marked as completed manually by the learner ("Mark as Complete").
+3. **Survey** — learners fill in an existing survey form in the LMS; the admin picks the target survey from a dropdown.
+4. **Essay / Reflection** — learners answer in long text; the admin grades manually.
+5. **Action Plan** — a Google Form-style form builder: short answers, paragraphs, multiple choice, checkboxes with minimum/maximum selection limits, dropdowns, files, scales, and star ratings. The admin reviews the answers manually.
 
-### Global Task: Kode Akses, QR Code, dan Trash
+### Standalone Tasks: Access Codes, QR Codes, and Trash
 
-- Task standalone dapat dilindungi **kode akses** yang diketik manual oleh admin (maksimal 12 karakter, unik)
-- Peserta membuka task standalone dengan tiga cara: memasukkan kode akses, membuka link redeem, atau link bertanda tangan (signed URL)
-- Task dibagikan melalui **QR code**; mengganti kode akses otomatis membatalkan link/QR lama
-- Penghapusan task bersifat **soft delete**: task masuk ke **Trash** dan dapat di-**Restore** atau dihapus permanen (**Delete forever**). Trash terpadu menampilkan filter tipe, dan mendukung aksi massal (pilih semua, restore/hapus permanen sekaligus)
+- A standalone task can be protected by an **access code** typed manually by the admin (maximum 12 characters, unique)
+- Learners open a standalone task in three ways: entering the access code, opening a redeem link, or opening a signed URL
+- Tasks are shared via **QR code**; changing the access code automatically invalidates the old link/QR
+- Deleting a task is a **soft delete**: the task goes to the **Trash** and can be **Restored** or permanently deleted (**Delete forever**). The unified trash has a type filter and supports bulk actions (select all, restore / permanent delete in bulk)
 
-## Tampilan Admin
+## Admin View
 
-- Dashboard Task Management menampilkan task berdasarkan wadahnya (induk/grup), dilengkapi pencarian dan dropdown item yang dapat dicari (AJAX)
-- Form pembuatan task: pilihan penempatan, tipe task, dan pengaturan pertanyaan yang menyesuaikan tipe
-- Aksi per baris tabel dirangkum dalam satu dropdown "...", mengikuti pola halaman Assessment
-- **Review submission:** daftar pengumpulan dilengkapi filter cepat (semua / perlu ditinjau / disetujui / ditolak) dan jendela review (modal) untuk menilai per peserta. Admin dapat **menyetujui (approve)**, **menolak (reject)**, atau **meminta peserta mengumpulkan ulang (request resubmit)**; submission yang diminta ulang ditandai dengan badge revisi di sisi peserta
-- **Preview dokumen** langsung dari halaman review, termasuk file presentasi (PPT/PPTX) dan PDF
-- **Ekspor hasil:** submission dapat diunduh sebagai Excel/CSV, dan seluruh lampiran peserta dapat diunduh sekaligus sebagai ZIP
+- The Task Management dashboard shows tasks by their container (parent/group), with search and a searchable (AJAX) item dropdown
+- The task creation form has placement selection, task type, and question settings that adapt to the type
+- Row actions are grouped into a single "..." dropdown, following the pattern of the Assessment page
+- **Submission review:** the submissions list has quick filters (all / needs review / approved / rejected) and a review window (modal) to grade each learner. Admins can **approve**, **reject**, or **request a resubmission**; a task that is requested for resubmission is marked with a revision badge on the learner side
+- **Document preview** directly from the review page, including presentation files (PPT/PPTX) and PDFs
+- **Exporting results:** submissions can be downloaded as Excel/CSV, and all learner attachments can be downloaded at once as a ZIP
 
-## Tampilan Peserta
+## Learner View
 
-- Halaman My Task berisi ringkasan dan daftar task peserta, dikelompokkan per kategori dan dilengkapi filter cepat Content Playlist
-- Setelah mengumpulkan task, peserta menerima pop-up konfirmasi sukses
-- Task dari course yang terhubung menampilkan status penyelesaiannya secara otomatis ("Course completed")
-- Task yang diminta admin untuk dikumpulkan ulang tampil dengan penanda revisi
+- The My Task page shows a summary and the learner's task list, grouped by category, with a Content Playlist quick filter
+- After submitting a task, the learner receives a success confirmation pop-up
+- Tasks from a linked course show their completion status automatically ("Course completed")
+- Tasks that the admin asked to be resubmitted are shown with a revision marker
 
-## Screenshot
+## Screenshots
 
-![Dashboard Task Management (Admin)](images/dashboard-admin.png)
-*Dashboard Task Management di sisi admin*
+![Task Management Dashboard (Admin)](images/dashboard-admin.png)
+*Task Management dashboard on the admin side*
 
-![Form Pembuatan Task](images/form-buat-task.png)
-*Form pembuatan task dengan pilihan penempatan dan tipe task*
+![Task Creation Form](images/form-create-task.png)
+*Task creation form with placement and task type selection*
 
-![Halaman My Task Peserta](images/dashboard-user.png)
-*Halaman My Task di sisi peserta*
+![Learner My Task Page](images/dashboard-user.png)
+*The My Task page on the learner side*
 
-![Global Task & Kode Akses](images/global-task.png)
-*Task mandiri (standalone) dengan kode akses dan QR code*
+![Standalone Task & Access Code](images/global-task.png)
+*A standalone task with an access code and QR code*
 
-![Review Submission](images/review-submissions.png)
-*Halaman review submission peserta di sisi admin*
+![Submission Review](images/review-submissions.png)
+*The learner submission review page on the admin side*
